@@ -1,20 +1,24 @@
 {
   "name": "sb-trading-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "South Bangla Trading",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "car",
+    "sales",
+    "import"
+  ],
+  "author": "Rabiul Islam",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongodb": "^4.1.4"
+    "mongodb": "^4.1.3"
   }
 }

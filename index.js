@@ -18,35 +18,18 @@ async function run() {
     try {
         await client.connect();
         const database = client.db('sb_tradings');
-        const userCollection = database.collection('users');
+        const usersCollection = database.collection('users');
 
-        // Get Single User
-        app.get('/users/:email', async (req, res) => {
-            const email = req.params.email;
-            const query = { email: email };
-            const user = await userCollection.findOne(query);
-            let isAdmin = false;
-            if (user?.role === 'admin') {
-                isAdmin = true;
-            }
-            res.json({ admin: isAdmin });
-        })
-
-        // Post User API
         app.post('/users', async (req, res) => {
-            const user = req.body;
-            const result = await userCollection.insertOne(user);
-            console.log(result);
+            const result = await usersCollection.insertOne(req.body);
             res.json(result);
         });
 
-        // Update User API
         app.put('/users', async (req, res) => {
-            const user = req.body;
             const filter = { email: user.email };
             const options = { upsert: true };
-            const updateDoc = { $set: user };
-            const result = await userCollection.updateOne(filter, updateDoc, options);
+            const updateUser = { $set: req.body };
+            const result = await usersCollection.updateOne(filter, updateUser, options);
             res.json(result);
         });
 
@@ -64,5 +47,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('SB Trading Server running at port', port);
+    console.log('SB Trading running at port', port);
 })

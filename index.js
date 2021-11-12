@@ -40,7 +40,7 @@ async function run() {
 
         // GET User PUT API
         app.put('/users', async (req, res) => {
-            const filter = { email: user.email };
+            const filter = { email: req.body };
             const options = { upsert: true };
             const updateUser = { $set: req.body };
             const result = await usersCollection.updateOne(filter, updateUser, options);

@@ -128,7 +128,7 @@ async function run() {
 
         //GET Reviews API
         app.get('/reviews', async (req, res) => {
-            const cursor = reviewsCollection.find({});
+            const cursor = reviewsCollection.find(req.query ? req.query : {});
             const result = await cursor.toArray();
             res.send(result);
         });
